@@ -23,9 +23,10 @@ package com.charlesstaal.smscsvconverter;
  */
 public class CommandLine {
     
-    
+    /*
     public static void main(String[] args){
         // dest, source, commas, senderindex, dateindex, messageindex
         
     }
 }
+*/
