@@ -56,7 +56,6 @@ public final class Message implements Comparable {
 
     @Override
     public final String toString() {
-        System.out.println(this.getMessage());
-        return this.getSender() + ": " + this.getDate() + ":\n" + this.getMessage();
+        return "\n" + this.getSender() + ": " + this.getDate() + ":\n" + this.getMessage() + "\n";
     }
 }
