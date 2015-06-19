@@ -29,6 +29,7 @@ public final class Message implements Comparable {
         this.date = date;
         this.sender = sender;
         this.message = message;
+        System.out.println("Created message: " + this.toString());
     }
 
     private final String getDate() {
