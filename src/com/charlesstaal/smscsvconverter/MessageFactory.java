@@ -17,7 +17,6 @@
  */
 package com.charlesstaal.smscsvconverter;
 
-import java.nio.CharBuffer;
 
 /**
  *
@@ -25,19 +24,9 @@ import java.nio.CharBuffer;
  */
 public class MessageFactory {
 
-    public static Message generateMessage(char[] message) {
-        char[][] info = new char[7][];
-        int commaCount = 0;
-        int index = 0;
-        CharBuffer cb = CharBuffer.allocate(message.length);
-        while (commaCount < 7) {
-            if (message[index] == ',') {
-                info[index] = cb.array();
-                ++index;
-                ++commaCount;
-                cb.clear();
-            }
-        }
-        return new Message(String.copyValueOf(info[1]), String.copyValueOf(info[1]), String.copyValueOf(info[6]));
+    public static Message generateMessage(String message) {
+        System.out.println("Generating message");
+        String[] info = message.split(",");
+        return new Message(info[1], info[4], info[6]);
     }
 }
