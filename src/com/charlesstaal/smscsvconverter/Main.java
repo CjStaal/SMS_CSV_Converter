@@ -56,13 +56,16 @@ public class Main {
             CharBuffer cb = CharBuffer.allocate(2048);
             while ((data = bf.read()) != -1) {
                 temp = (char) data;
+                System.out.println(temp);
                 cb.append(temp);
                 if (temp == ',') {
                     ++commaCount;
-                }
-                if (commaCount % 7 == 0) {
-                    messageList.add(MessageFactory.generateMessage(cb.array()));
-                    cb.clear();
+                    System.out.println("Commacount:" + commaCount);
+                    if (commaCount % 7 == 0) {
+                        System.out.println("Trying to generate message.");
+                        messageList.add(MessageFactory.generateMessage(cb.toString()));
+                        cb.clear();
+                    }
                 }
 
             }
@@ -73,7 +76,7 @@ public class Main {
                 bw.write(message.toString());
                 bw.flush();
             }
-            
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
