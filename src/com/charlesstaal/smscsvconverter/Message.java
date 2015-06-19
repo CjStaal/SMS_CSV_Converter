@@ -46,8 +46,8 @@ public final class Message implements Comparable {
 
     @Override
     public final int compareTo(Object msg) {
-        if(msg instanceof Message){
-            if(msg.toString().equals(this.toString())){
+        if (msg instanceof Message) {
+            if (msg.toString().equals(this.toString())) {
                 return 0;
             }
         }
@@ -56,6 +56,7 @@ public final class Message implements Comparable {
 
     @Override
     public final String toString() {
+        System.out.println(this.getMessage());
         return this.getSender() + ": " + this.getDate() + ":\n" + this.getMessage();
     }
 }

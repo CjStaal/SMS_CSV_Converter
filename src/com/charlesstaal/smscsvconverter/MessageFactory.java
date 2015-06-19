@@ -24,10 +24,10 @@ package com.charlesstaal.smscsvconverter;
 public class MessageFactory {
 
     public static Message generateMessage(char[] message) {
-        System.out.println("Parsing message: " + String.valueOf(message));
         String[] info = new String[7];
         StringBuilder sb = new StringBuilder();
         int commaCount = 0;
+        message = String.valueOf(message).trim().toCharArray();
         for (int index0 = 0, index1 = 0; index0 < message.length; index0++) {
             if (commaCount < 6) {
                 if (message[index0] == ',') {
@@ -41,12 +41,8 @@ public class MessageFactory {
                 sb.append(message[index0]);
             }
         }
-        info[6] = sb.toString();
+        info[info.length-1] = sb.toString();
         sb.delete(0, sb.length());
-
-        for(String msg : info){
-            System.out.println(msg);
-        }
         return new Message(info[4], info[1], info[6]);
     }
 }
