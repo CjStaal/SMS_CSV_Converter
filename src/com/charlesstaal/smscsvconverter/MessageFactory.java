@@ -25,8 +25,10 @@ package com.charlesstaal.smscsvconverter;
 public class MessageFactory {
 
     public static Message generateMessage(String message) {
-        System.out.println("Generating message");
         String[] info = message.split(",");
-        return new Message(info[1], info[4], info[6]);
+        for(String msg : info){
+            System.out.println(msg);
+        }
+        return new Message(info[4], info[1], info[6]);
     }
 }

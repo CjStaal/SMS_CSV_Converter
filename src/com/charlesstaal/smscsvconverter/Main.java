@@ -51,26 +51,22 @@ public class Main {
                     new InputStreamReader(
                             new FileInputStream(new File("C:\\Users\\Charles\\Documents\\Jay.csv")), Charset.forName("UTF-8")));
             int data;
-            int commaCount = 0;
             char temp;
-            CharBuffer cb = CharBuffer.allocate(2048);
+            CharBuffer cb = CharBuffer.allocate(4096);
+            cb.clear();
             while ((data = bf.read()) != -1) {
                 temp = (char) data;
-                System.out.println(temp);
-                cb.append(temp);
-                if (temp == ',') {
-                    ++commaCount;
-                    System.out.println("Commacount:" + commaCount);
-                    if (commaCount % 7 == 0) {
-                        System.out.println("Trying to generate message.");
-                        messageList.add(MessageFactory.generateMessage(cb.toString()));
-                        cb.clear();
-                    }
+                if (temp == '~') {
+                    cb.flip();
+                    messageList.add(MessageFactory.generateMessage(cb.array()));
+                    cb = CharBuffer.allocate(4096);
+                } else {
+                    cb.append(temp);
                 }
 
             }
             Collections.reverse(messageList);
-            File newFile = new File("C\\Users\\Charles\\Documents\\JayConverted.txt");
+            File newFile = new File("C:\\Users\\Charles\\Documents\\JayConverted.txt");
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(newFile)));
             for (Message message : messageList) {
                 bw.write(message.toString());
