@@ -17,15 +17,33 @@
  */
 package com.charlesstaal.smscsvconverter;
 
-
 /**
  *
  * @author Charles Joseph Staal
  */
 public class MessageFactory {
 
-    public static Message generateMessage(String message) {
-        String[] info = message.split(",");
+    public static Message generateMessage(char[] message) {
+        System.out.println("Parsing message: " + String.valueOf(message));
+        String[] info = new String[7];
+        StringBuilder sb = new StringBuilder();
+        int commaCount = 0;
+        for (int index0 = 0, index1 = 0; index0 < message.length; index0++) {
+            if (commaCount < 6) {
+                if (message[index0] == ',') {
+                    ++commaCount;
+                    info[index1++] = sb.toString();
+                    sb.delete(0, sb.length());
+                } else {
+                    sb.append(message[index0]);
+                }
+            } else {
+                sb.append(message[index0]);
+            }
+        }
+        info[6] = sb.toString();
+        sb.delete(0, sb.length());
+
         for(String msg : info){
             System.out.println(msg);
         }
